@@ -1,5 +1,3 @@
-import React from "react";
-
 function CategoryList({ categories, selectedCategory, onCategorySelect }) {
   return (
     <div className="category-list">

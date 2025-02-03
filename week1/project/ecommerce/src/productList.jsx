@@ -1,7 +1,4 @@
-import React from "react";
-
 function ProductList({ products }) {
-  console.log("Rendering products:", products);
   return (
     <div className="product-list">
       {products.map((product) => (
