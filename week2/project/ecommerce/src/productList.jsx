@@ -20,18 +20,22 @@ const ProductList = () => {
         if (!response.ok) throw new Error("Failed to fetch products.");
         const data = await response.json();
 
-        setTimeout(() => {
-          setProducts(data);
-          setLoading(false);
-        }, 1000);
+        setProducts(data);
       } catch (error) {
-        setError(error.message);
+        console.error("Fetch Error:", error.message);
+        setError(
+          "We couldn't load the products at this time. Please try again later."
+        );
+      } finally {
         setLoading(false);
       }
     };
 
     setLoading(true);
-    fetchProducts();
+
+    setTimeout(() => {
+      fetchProducts();
+    }, 1000);
   }, [selectedCategory]);
 
   if (loading) return <p className="loading-message">LOADING PRODUCTS ...</p>;

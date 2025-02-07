@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const CategoryList = ({ selectedCategory, setSelectedCategory }) => {
   const [categories, setCategories] = useState([]);
-
+const [error, setError] = useState(null);
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -14,10 +14,13 @@ const CategoryList = ({ selectedCategory, setSelectedCategory }) => {
         setCategories(data);
       } catch (error) {
         console.error(error.message);
+        setError("We couldn't load the categories at this time. Please try again later.");
       }
     };
     fetchCategories();
   }, []);
+
+  if (error) return <p className="error-message">Error: {error}</p>;
 
   return (
     <div className="category-list">

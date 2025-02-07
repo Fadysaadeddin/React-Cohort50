@@ -14,18 +14,17 @@ const ProductDetail = () => {
         const response = await fetch(`https://fakestoreapi.com/products/${id}`);
         if (!response.ok) throw new Error("Failed to fetch product details.");
         const data = await response.json();
-        setTimeout(() => {
-          setProduct(data);
-          setLoading(false);
-        }, 1000);
+        setProduct(data);
       } catch (error) {
         setError(error.message);
+      } finally {
         setLoading(false);
       }
     };
-
     setLoading(true);
-    fetchProduct();
+    setTimeout(() => {
+      fetchProduct();
+    }, 1000);
   }, [id]);
 
   if (loading) return <p className="loading-message">LOADING PRODUCTS ...</p>;
