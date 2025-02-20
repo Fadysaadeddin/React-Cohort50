@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
-import { useFavorites } from "./FavoritesContext";
-
+import { useAppContext } from "./AppContext";
 const Navbar = () => {
-  const { favoriteIds } = useFavorites();
-
+  const { favoriteIds, setSelectedCategory } = useAppContext();
   return (
     <nav className="navbar">
-      <Link to="/" className="nav-link">Home</Link>
+      <Link
+        to="/"
+        className="nav-link"
+        onClick={() => setSelectedCategory(null)}
+      >
+        Home
+      </Link>
       <Link to="/favourites" className="nav-link">
         Favourites ({favoriteIds.length})
       </Link>

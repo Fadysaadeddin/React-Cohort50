@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useFavorites } from "./FavoritesContext";
+import { useAppContext } from "./AppContext"; // Removed 'mapping'
+import ProductCard from "./ProductCard";
 
 const FavoritesPage = () => {
-    const { favoriteIds, toggleFavorite } = useFavorites(); 
+  const { favoriteIds } = useAppContext();
+
   const [favoriteProducts, setFavoriteProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFavoriteProducts = async () => {
@@ -49,21 +49,7 @@ const FavoritesPage = () => {
       <h2>Favourite Products</h2>
       <div className="product-grid">
         {favoriteProducts.map((product) => (
-          <div
-            key={product.id}
-            className="product-card"
-            onClick={() => navigate(`/product/${product.id}`)}
-          >
-            <img src={product.image} alt={product.title} />
-            <h3>{product.title}</h3>
-            <p>${product.price}</p>
-            <button
-          className="favorite-btn"
-          onClick={() => toggleFavorite(product.id)}
-        >
-          {favoriteIds.includes(product.id) ? "❤️" : "🤍"}
-        </button>
-          </div>
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>
