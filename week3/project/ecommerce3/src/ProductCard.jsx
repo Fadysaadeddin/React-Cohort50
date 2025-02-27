@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
       className="product-card"
       onClick={() => navigate(`/product/${product.id}`)}
     >
-      <img src={product.image} alt={product.title} />
+      <img className="product-card-img" src={product.image} alt={product.title} />
       <h3>{product.title}</h3>
       <p>${product.price}</p>
       <FavoriteButton productId={product.id} />

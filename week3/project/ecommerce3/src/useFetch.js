@@ -14,10 +14,9 @@ const useFetch = (initialUrl) => {
         const response = await fetch(url);
         if (!response.ok) throw new Error("Failed to fetch data.");
         const result = await response.json();
-        setTimeout(() => {
-          setData(result);
-          setLoading(false);
-        }, 1000);
+
+        setData(result);
+        setLoading(false);
       } catch (err) {
         setError(err.message);
         setLoading(false);
